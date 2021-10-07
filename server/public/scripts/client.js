@@ -5,7 +5,7 @@ function handleReady() {
 
   // click listeners
   $('#submitButton').on('click', playRound )
-
+  $('#restartButton').on('click', restartGame)
 
 };
 
@@ -13,9 +13,9 @@ function getGuesses(){
     // get guesses from the server
     $.ajax({
       method: 'GET',
-      url: '/guesses'
+      url: '/results'
   }).then(function(response) {
-      console.log('SUCCESS!!', response);
+      console.log('this is resultsArray: ', response);
       renderToDom(response);
   }).catch(function(response){
       console.log('Request Failed');
@@ -24,23 +24,19 @@ function getGuesses(){
 
 
 // render guesses to table
-function renderToDom(){
+function renderToDom(response){
     $('#resultsTable').empty();
 
-    // for ( let guess of guesses){
-    //     $('#resultsTable').append(`
-    //     <tr>
-    //         <td>${playerOneGuess.text}</td>
-    //         <td>${playerOneResult.text}</td>
-    //         <td>${playerTwoGuess.text}</td>
-    //         <td>${playerTwoResult.text}</td>
-    //         <td>${playerThreeGuess.text}</td>
-    //         <td>${playerThreeResult.text}</td>
-    //         <td>${playerFourGuess.text}</td>
-    //         <td>${playerFourResult.text}</td>
-    //     </tr>
-    //     `)
-//     }
+    for ( let round of response){
+        $('#resultsTable').append(`
+        <tr>
+            <td>${round.playerOneGuess}</td>
+            <td>${round.playerOneResult}</td>
+            <td>${round.playerTwoGuess}</td>
+            <td>${round.playerTwoResult}</td>
+        </tr>
+        `)
+    }
  }
 
 
@@ -57,7 +53,7 @@ function playRound(){
       }
   }).then(function (response){
       console.log('Success POST', response );
-      renderToDom();
+      getGuesses();
       $('#playerOneGuessIn').val('');
       $('#playerTwoGuessIn').val('');
       $('#playerThreeGuessIn').val('');
@@ -67,3 +63,15 @@ function playRound(){
   })
 
 }
+
+
+function restartGame() {
+    $('#playerOneGuessIn').val('');
+    $('#playerTwoGuessIn').val('');
+    $('#playerThreeGuessIn').val('');
+    $('#playerFourGuessIn').val('');
+
+    $('#resultsTable').remove();
+    
+}
+

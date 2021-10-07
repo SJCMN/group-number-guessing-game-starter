@@ -16,8 +16,9 @@ app.use(express.static("server/public"));
 // ****** GET & POST Routes go here *********
 
 //GET for when the submit button is clicked
-app.get("/", (req, res) => {
+app.get("/results", (req, res) => {
   console.log("this is the submit button GET");
+  res.send(resultsArray);
 });
 
 //GET for reset button
@@ -30,7 +31,7 @@ app.post("/guesses" , (req,res) => {
   // grabs the guesses from input boxes
   let allGuesses = req.body;
 
-  guessesArray.push(allGuesses);
+  // guessesArray.push(allGuesses);
 
   console.log("This is the guesses array!", allGuesses);
 
@@ -42,89 +43,76 @@ app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
 
-
-// function gameLogic(guess) {
-
   
   
-//   let magicNum = getRandom(1, 25);
+let magicNum = getRandom(1, 25);
 
 
-//   if (magicNum === guess) {
-//     return `good job buddy!`
-//   } else if (guess > magicNum) {
-//     return `too high!`
-//   } else if (guess < magicNum) {
-//     return `too low!`
-//   } else if (guess === '') {
-//     return `please enter a guess!`
-//   }
-
-
-// }
 
 
 function receiveGuesses(object) {
-  checkPlayer(1, object.playerOneGuess)
+  checkPlayer(object.playerOneGuess, object.playerTwoGuess)
   // checkPlayer(2, object.playerTwoGuess)
   // checkPlayer(3, object.playerThreeGuess)
   // checkPlayer(4, object.playerFourGuess)
 }
 
-function checkPlayer(player, guess) {
-  switch(player) {
-    case 1:
-      let p1Guess = guess;
-      if(guess > magicNum) {
-        playerOneResult = higher
-      } else if(guess < magicNum) {
-        playerOneResult = lower;
+function checkPlayer(guess1, guess2) {
+  // switch(player) {
+  //   case 1:
+      let p1Guess = guess1;
+      if(p1Guess > magicNum) {
+        playerOneResult = "too high"
+      } else if(p1Guess < magicNum) {
+        playerOneResult = " too low";
       } else {
-        playerOneResult = winner;
+        playerOneResult = "winner";
       }
-      break;
-    case 2:
-      let p2Guess = guess;
-      if(guess > magicNum) {
-        playerTwoResult = higher
-      } else if(guess < magicNum) {
-        playerTwoResult = lower;
+      console.log(playerOneResult);
+      // break;
+  //   case 2:
+      let p2Guess = guess2;
+      if(p2Guess > magicNum) {
+        playerTwoResult = "too high"
+      } else if(p2Guess < magicNum) {
+        playerTwoResult = "too low";
       } else {
-        playerTwoResult = winner;
+        playerTwoResult = "winner";
       }
-      break;
-    case 3:
-      let p3Guess = guess;
-      if(guess > magicNum) {
-        playerThreeResult = higher
-      } else if(guess < magicNum) {
-        playerThreeResult = lower;
-      } else {
-        playerThreeResult = winner;
-      }
-      break;
-    case 4:
-      let p4Guess = guess;
-      if(guess > magicNum) {
-        playerOneResult = higher
-      } else if(guess < magicNum) {
-        playerOneResult = lower;
-      } else {
-        playerOneResult = winner;
-      }
-      break; 
-  }
+      console.log('magicNum is: ', magicNum);
+  //     break;
+  //   case 3:
+  //     let p3Guess = guess;
+  //     if(guess > magicNum) {
+  //       playerThreeResult = higher
+  //     } else if(guess < magicNum) {
+  //       playerThreeResult = lower;
+  //     } else {
+  //       playerThreeResult = winner;
+  //     }
+  //     break;
+  //   case 4:
+  //     let p4Guess = guess;
+  //     if(guess > magicNum) {
+  //       playerOneResult = higher
+  //     } else if(guess < magicNum) {
+  //       playerOneResult = lower;
+  //     } else {
+  //       playerOneResult = winner;
+  //     }
+  //     break; 
+  // }
   roundCounter++;
   results = {
       round: roundCounter,
       playerOneGuess: p1Guess,
-      playerOneResult: playerTwoResult,
-      playerTwoGuess: p2Guess,
-      playerTwoResult: playerTwoResult,
-      playerThreeGuess: p3Guess,
-      playerThreeResult: playerThreeResult,
-      playerFourGuess: p4Guess,
-      playerFourResult: playerFourResult
+      playerOneResult: playerOneResult,
+      // playerTwoGuess: p2Guess,
+      // playerTwoResult: playerTwoResult,
+      // playerThreeGuess: p3Guess,
+      // playerThreeResult: playerThreeResult,
+      // playerFourGuess: p4Guess,
+      // playerFourResult: playerFourResult
   }
   resultsArray.push(results);
 } 
