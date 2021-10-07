@@ -11,17 +11,17 @@
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>GAME NAME!</h1>
+    <h1 id="gameTitle">GAME NAME!</h1>
     <h2 id="roundIndicator">ROUND INDICATOR<span id="roundDisplay"></span></h2>
     <div id="topDiv">
       <button id="submitButton">SUBMIT!</button>
       <button id="restartButton">RESTART!</button>
     </div>
     <div id="inputsDiv">
-      <input type="text" placeholder="Player 1 Name" id="playerOneNameIn">
-      <input type="text" placeholder="Player 2 Name" id="playerTwoNameIn">
-      <input type="text" placeholder="Player 3 Name" id="playerThreeNameIn">
-      <input type="text" placeholder="Player 4 Name" id="playerFourNameIn">
+      <input type="text" placeholder="Player 1 Guess" id="playerOneGuessIn">
+      <input type="text" placeholder="Player 2 Guess" id="playerTwoGuessIn">
+      <input type="text" placeholder="Player 3 Guess" id="playerThreeGuessIn">
+      <input type="text" placeholder="Player 4 Guess" id="playerFourGuessIn">
     </div>
 
     <table>
@@ -39,10 +39,9 @@
 
       </thead>
 
-      <tbody>
-
-      </tbody>
+      <tbody id="resultsTable"></tbody>
 
     </table>
+
 </body>
 </html>
