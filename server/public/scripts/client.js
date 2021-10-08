@@ -1,5 +1,6 @@
 $(document).ready(handleReady);
 
+
 function handleReady() {
   console.log("jquery is loaded!")
 
@@ -8,6 +9,7 @@ function handleReady() {
   $('#restartButton').on('click', restartGame)
 
 };
+
 
 function getGuesses(){
     // get guesses from the server
@@ -26,17 +28,19 @@ function getGuesses(){
 
 // render guesses to table
 function renderToDom(arr){
-    
     $('#resultsTable').empty();
     for ( let index of arr){
         console.log('render to DOM round for of loop', index);
     //  for (let i = 0; i<arr.length; i++){
         if(index.playerOneResult == 'winner') {
-            alert('Winner!')
-        } elseif(index.playerTwoResult == 'winner') {
-            alert('Winner!')
-        } } elseif(index.playerTwoResult == 'winner') {
-            alert('Winner!')
+            alert('Winner!: Player 1!!')
+        } else if (index.playerTwoResult == 'winner') {
+            alert('Winner!: Player 2!!!')
+        } else if(index.playerThreeResult == 'winner') {
+            alert('Winner!: Player 3!!!')
+        } else if(index.playerFourResult == 'winner') {
+            alert('Winner!: Player4!!!!');
+        }
         $('#resultsTable').append(`
             <tr>
                 <td>${index.playerOneGuess}</td>
@@ -54,7 +58,6 @@ function renderToDom(arr){
     $('#roundDisplay').append(arr.length)
     // }
  }
-
 
 
 function playRound(){
@@ -90,6 +93,5 @@ function restartGame() {
         renderToDom(response);
     })
     // $('#resultsTable').remove();
-    
 }
 

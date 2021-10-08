@@ -30,6 +30,7 @@ app.get("/reset", (req, res) => {
   res.send(resultsArray);
 });
 
+
 app.post("/guesses" , (req,res) => {
   console.log("This is req.body", req.body);
   // grabs the guesses from input boxes
@@ -41,18 +42,17 @@ app.post("/guesses" , (req,res) => {
   res.sendStatus(201);
 });
 
+
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
 
+
 let magicNum = getRandom(1, 25);
 
+
 function receiveGuesses(object) {
-  
   checkPlayer(object.playerOneGuess, object.playerTwoGuess, object.playerThreeGuess, object.playerFourGuess)
-  // checkPlayer(2, object.playerTwoGuess)
-  // checkPlayer(3, object.playerThreeGuess)
-  // checkPlayer(4, object.playerFourGuess)
 }
 // a function to check player guesses against the magicNum,
 // can be refactored to receive an array of guesses and loop through
@@ -82,7 +82,7 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
       } else if(p3Guess < magicNum) {
         playerThreeResult = "too low";
       } else {
-        playerThreeResult = winner;
+        playerThreeResult = 'winner';
       }
      let p4Guess = guess4;
       if(p4Guess > magicNum) {
@@ -105,4 +105,4 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
       playerFourResult: playerFourResult
   }
   resultsArray.push(results);
-}
+};

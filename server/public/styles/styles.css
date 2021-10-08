@@ -5,17 +5,23 @@
     padding-top: 10px;
 };
 
-#topDiv {
+/* #topDiv {
     display: flex;
-    
-    margin: auto;
+    justify-content: center;
+    margin: 10px;
     width: 50%;
     
-};
+}; */
 
 #roundIndicator {
     margin: 10px;
     text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
 }
 
 .grey {

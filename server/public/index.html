@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +12,20 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
+
     <h1 id="gameTitle">What's the number?</h1>
     
     <div id="topDiv">
-
     <h2 id="roundIndicator">ROUND INDICATOR: <span id="roundDisplay"></span></h2>
-    
+
+    <div class="buttons">
       <button id="submitButton" class="btn btn-outline-primary">SUBMIT!</button>
       <button id="restartButton" class="btn btn-outline-danger">RESTART!</button>
-  
+  </div>
     </div>
+
     <div id="inputsDiv">
       <input type="text" placeholder="Player 1 Guess" id="playerOneGuessIn">
       <input type="text" placeholder="Player 2 Guess" id="playerTwoGuessIn">
@@ -41,17 +45,13 @@
           <td>Player 4</td>
           <td>Result</td>
         </tr>
-
       </thead>
-
       <tbody id="resultsTable"></tbody>
-
     </table>
 
 <footer class="grey">
-  <p>&copy; Sam, Xibz, John, Jack</p>
+  <p>&copy; Sam, Xibz, John and Jack</p>
 </footer>
 
 </body>
-
 </html>
