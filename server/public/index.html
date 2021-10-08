@@ -7,6 +7,7 @@
   <title>Guess A Number!</title>
   <script src="vendors/jquery.min.js"></script>
   <script src="scripts/client.js"></script>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
@@ -17,8 +18,9 @@
 
     <h2 id="roundIndicator">ROUND INDICATOR: <span id="roundDisplay"></span></h2>
     
-      <button id="submitButton">SUBMIT!</button>
-      <button id="restartButton">RESTART!</button>
+      <button id="submitButton" class="btn btn-outline-primary">SUBMIT!</button>
+      <button id="restartButton" class="btn btn-outline-danger">RESTART!</button>
+  
     </div>
     <div id="inputsDiv">
       <input type="text" placeholder="Player 1 Guess" id="playerOneGuessIn">
@@ -27,7 +29,7 @@
       <input type="text" placeholder="Player 4 Guess" id="playerFourGuessIn">
     </div>
 
-    <table>
+    <table class="table table-dark table-hover">
       <thead>
         <tr>
           <td>Player 1</td>
@@ -46,5 +48,10 @@
 
     </table>
 
+<footer class="grey">
+  <p>&copy; Sam, Xibz, John, Jack</p>
+</footer>
+
 </body>
+
 </html>

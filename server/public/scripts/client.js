@@ -31,7 +31,12 @@ function renderToDom(arr){
     for ( let index of arr){
         console.log('render to DOM round for of loop', index);
     //  for (let i = 0; i<arr.length; i++){
-    
+        if(index.playerOneResult == 'winner') {
+            alert('Winner!')
+        } elseif(index.playerTwoResult == 'winner') {
+            alert('Winner!')
+        } } elseif(index.playerTwoResult == 'winner') {
+            alert('Winner!')
         $('#resultsTable').append(`
             <tr>
                 <td>${index.playerOneGuess}</td>
