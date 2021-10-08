@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 5000;
-const guessesArray = require("./modules/guesses");
 const getRandom = require("./modules/random");
 let resultsArray = [];
 let roundCounter = 0;
@@ -26,14 +25,15 @@ app.get("/reset", (req, res) => {
   console.log("this is the reset button GET");
   resultsArray = [];
   roundCounter = 0;
+  magicNum = getRandom(1,25);
+  console.log('this is magicNum', magicNum)
+  res.send(resultsArray);
 });
 
 app.post("/guesses" , (req,res) => {
   console.log("This is req.body", req.body);
   // grabs the guesses from input boxes
   let allGuesses = req.body;
-
-  // guessesArray.push(allGuesses);
 
   console.log("This is the guesses array!", allGuesses);
 
@@ -45,12 +45,7 @@ app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
 
-  
-  
 let magicNum = getRandom(1, 25);
-
-
-
 
 function receiveGuesses(object) {
   
@@ -59,10 +54,9 @@ function receiveGuesses(object) {
   // checkPlayer(3, object.playerThreeGuess)
   // checkPlayer(4, object.playerFourGuess)
 }
-
+// a function to check player guesses against the magicNum,
+// can be refactored to receive an array of guesses and loop through
 function checkPlayer(guess1, guess2, guess3, guess4) {
-  // switch(player) {
-  //   case 1:
       let p1Guess = guess1;
       if(p1Guess > magicNum) {
         playerOneResult = "too high"
@@ -72,8 +66,6 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
         playerOneResult = "winner";
       }
       console.log("This is the playerOneResult: ", playerOneResult);
-      // break;
-  //   case 2:
       let p2Guess = guess2;
       if(p2Guess > magicNum) {
         playerTwoResult = "too high"
@@ -84,8 +76,6 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
       }
       console.log("This is the playerOneResult: ", playerTwoResult);
       console.log('magicNum is: ', magicNum);
-  //    // break;
-  // // case 3:
       let p3Guess = guess3;
       if(p3Guess > magicNum) {
         playerThreeResult = "too high"
@@ -94,9 +84,7 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
       } else {
         playerThreeResult = winner;
       }
-  //   // break;
-  // // case 4:
-      let p4Guess = guess4;
+     let p4Guess = guess4;
       if(p4Guess > magicNum) {
         playerFourResult = "too high"
       } else if(p4Guess < magicNum) {
@@ -104,9 +92,6 @@ function checkPlayer(guess1, guess2, guess3, guess4) {
       } else {
         playerFourResult = "winner";
       }
-  //   // break; 
-  // }
-
   roundCounter++;
   let results = {
       round: roundCounter,

@@ -16,6 +16,7 @@ function getGuesses(){
       url: '/results'
   }).then(function(response) {
       console.log('this is resultsArray: ', response);
+
       renderToDom(response);
   }).catch(function(response){
       console.log('Request Failed');
@@ -26,12 +27,12 @@ function getGuesses(){
 // render guesses to table
 function renderToDom(arr){
     
-
+    $('#resultsTable').empty();
     for ( let index of arr){
         console.log('render to DOM round for of loop', index);
-        
     //  for (let i = 0; i<arr.length; i++){
-            $('#resultsTable').append(`
+    
+        $('#resultsTable').append(`
             <tr>
                 <td>${index.playerOneGuess}</td>
                 <td>${index.playerOneResult}</td>
@@ -44,7 +45,8 @@ function renderToDom(arr){
             </tr>
             `)
         }
-        $('#resultsTable').empty();
+    $('#roundDisplay').empty();
+    $('#roundDisplay').append(arr.length)
     // }
  }
 
@@ -79,8 +81,10 @@ function restartGame() {
     $.ajax({
         method: 'GET',
         url: '/reset'
+    }).then(function(response) {
+        renderToDom(response);
     })
-    $('#resultsTable').remove();
+    // $('#resultsTable').remove();
     
 }
 
