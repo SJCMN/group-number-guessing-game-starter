@@ -22,8 +22,10 @@ app.get("/results", (req, res) => {
 });
 
 //GET for reset button
-app.get("/", (req, res) => {
+app.get("/reset", (req, res) => {
   console.log("this is the reset button GET");
+  resultsArray = [];
+  roundCounter = 0;
 });
 
 app.post("/guesses" , (req,res) => {
@@ -51,13 +53,14 @@ let magicNum = getRandom(1, 25);
 
 
 function receiveGuesses(object) {
-  checkPlayer(object.playerOneGuess, object.playerTwoGuess)
+  
+  checkPlayer(object.playerOneGuess, object.playerTwoGuess, object.playerThreeGuess, object.playerFourGuess)
   // checkPlayer(2, object.playerTwoGuess)
   // checkPlayer(3, object.playerThreeGuess)
   // checkPlayer(4, object.playerFourGuess)
 }
 
-function checkPlayer(guess1, guess2) {
+function checkPlayer(guess1, guess2, guess3, guess4) {
   // switch(player) {
   //   case 1:
       let p1Guess = guess1;
@@ -68,7 +71,7 @@ function checkPlayer(guess1, guess2) {
       } else {
         playerOneResult = "winner";
       }
-      console.log(playerOneResult);
+      console.log("This is the playerOneResult: ", playerOneResult);
       // break;
   //   case 2:
       let p2Guess = guess2;
@@ -79,40 +82,42 @@ function checkPlayer(guess1, guess2) {
       } else {
         playerTwoResult = "winner";
       }
+      console.log("This is the playerOneResult: ", playerTwoResult);
       console.log('magicNum is: ', magicNum);
-  //     break;
-  //   case 3:
-  //     let p3Guess = guess;
-  //     if(guess > magicNum) {
-  //       playerThreeResult = higher
-  //     } else if(guess < magicNum) {
-  //       playerThreeResult = lower;
-  //     } else {
-  //       playerThreeResult = winner;
-  //     }
-  //     break;
-  //   case 4:
-  //     let p4Guess = guess;
-  //     if(guess > magicNum) {
-  //       playerOneResult = higher
-  //     } else if(guess < magicNum) {
-  //       playerOneResult = lower;
-  //     } else {
-  //       playerOneResult = winner;
-  //     }
-  //     break; 
+  //    // break;
+  // // case 3:
+      let p3Guess = guess3;
+      if(p3Guess > magicNum) {
+        playerThreeResult = "too high"
+      } else if(p3Guess < magicNum) {
+        playerThreeResult = "too low";
+      } else {
+        playerThreeResult = winner;
+      }
+  //   // break;
+  // // case 4:
+      let p4Guess = guess4;
+      if(p4Guess > magicNum) {
+        playerFourResult = "too high"
+      } else if(p4Guess < magicNum) {
+        playerFourResult = "too low";
+      } else {
+        playerFourResult = "winner";
+      }
+  //   // break; 
   // }
+
   roundCounter++;
-  results = {
+  let results = {
       round: roundCounter,
       playerOneGuess: p1Guess,
       playerOneResult: playerOneResult,
-      // playerTwoGuess: p2Guess,
-      // playerTwoResult: playerTwoResult,
-      // playerThreeGuess: p3Guess,
-      // playerThreeResult: playerThreeResult,
-      // playerFourGuess: p4Guess,
-      // playerFourResult: playerFourResult
+      playerTwoGuess: p2Guess,
+      playerTwoResult: playerTwoResult,
+      playerThreeGuess: p3Guess,
+      playerThreeResult: playerThreeResult,
+      playerFourGuess: p4Guess,
+      playerFourResult: playerFourResult
   }
   resultsArray.push(results);
-} 
+}

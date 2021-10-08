@@ -24,19 +24,28 @@ function getGuesses(){
 
 
 // render guesses to table
-function renderToDom(response){
-    $('#resultsTable').empty();
+function renderToDom(arr){
+    
 
-    for ( let round of response){
-        $('#resultsTable').append(`
-        <tr>
-            <td>${round.playerOneGuess}</td>
-            <td>${round.playerOneResult}</td>
-            <td>${round.playerTwoGuess}</td>
-            <td>${round.playerTwoResult}</td>
-        </tr>
-        `)
-    }
+    for ( let index of arr){
+        console.log('render to DOM round for of loop', index);
+        
+    //  for (let i = 0; i<arr.length; i++){
+            $('#resultsTable').append(`
+            <tr>
+                <td>${index.playerOneGuess}</td>
+                <td>${index.playerOneResult}</td>
+                <td>${index.playerTwoGuess}</td>
+                <td>${index.playerTwoResult}</td>
+                <td>${index.playerThreeGuess}</td>
+                <td>${index.playerThreeResult}</td>
+                <td>${index.playerFourGuess}</td>
+                <td>${index.playerFourResult}</td>
+            </tr>
+            `)
+        }
+        $('#resultsTable').empty();
+    // }
  }
 
 
@@ -58,19 +67,19 @@ function playRound(){
       $('#playerTwoGuessIn').val('');
       $('#playerThreeGuessIn').val('');
       $('#playerFourGuessIn').val('');
+      
   }).catch(function(response){
-      console.log('THIS FAILED POST');
+      console.log('POST FAILED');
   })
 
 }
 
 
 function restartGame() {
-    $('#playerOneGuessIn').val('');
-    $('#playerTwoGuessIn').val('');
-    $('#playerThreeGuessIn').val('');
-    $('#playerFourGuessIn').val('');
-
+    $.ajax({
+        method: 'GET',
+        url: '/reset'
+    })
     $('#resultsTable').remove();
     
 }
